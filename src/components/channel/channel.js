@@ -46,7 +46,6 @@ const Channel = () => {
     };
     getData();
   }, [id]);
-  console.log(playList, "play");
   return (
     <Box minHeight={"95vh"} mt={"1vh"}>
       <Box>

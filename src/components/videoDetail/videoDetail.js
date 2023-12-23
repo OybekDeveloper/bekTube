@@ -33,7 +33,6 @@ const VideoDetail = () => {
         const videoComment = await ApiService.fetching(
           `commentThreads?part=snippet&videoId=${id}`
         );
-        // console.log(videoComment.items);
         setVideoComment(videoComment.items);
         setRelatedVideo(related.items);
         setVideoDetails(data.items[0]);
