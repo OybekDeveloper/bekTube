@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
-const PlaylistDetail = ({playlist}) => {
-  return (
-    <div>
-        {playlist?.items}
-    </div>
-  )
-}
+const PlaylistDetail = ({ playlist }) => {
+  return <div>{playlist?.items}</div>;
+};
 
-export default PlaylistDetail
+export default PlaylistDetail;

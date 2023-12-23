@@ -42,7 +42,7 @@ const ChannelCard = ({ video, marginTop }) => {
               border: "1px solid #e3e3e3",
             }}
           />
-          <Typography variant={"h5"}>
+          <Typography color={"white"} variant={"h5"}>
             {title}{" "}
             <CheckCircle sx={{ fontSize: "14px", color: "gray", ml: "5px" }} />
           </Typography>

@@ -1,9 +1,8 @@
-import { Box,  Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import logo from "../../constats/logo3.jpg";
 import { colors } from "../../constats/colors";
 import { Link } from "react-router-dom";
 import SearchBar from "../search-bar/search-bar";
-
 
 const Navbar = () => {
   return (
@@ -13,8 +12,10 @@ const Navbar = () => {
       justifyContent={"space-between"}
       p={2}
       sx={{
-        position: "sticky",
+        width: "100%",
         top: 0,
+        left: 0,
+        position: "fixed",
         zIndex: 999,
         background: colors.navbarC,
       }}
@@ -42,9 +43,7 @@ const Navbar = () => {
           alignItems: "center",
           transition: "all .3s ease-in-out",
         }}
-      >
-        
-      </Box>
+      ></Box>
     </Stack>
   );
 };

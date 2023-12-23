@@ -68,11 +68,11 @@ const Channel = () => {
           selectedCategoryHandler={selectedCategoryHandler}
           selectedCategory={selectedCategory}
         />
-        <hr style={{ marginBottom: "10px" }} />
+        <hr style={{ marginBottom: "10px" }} color="grey" />
         {selectedCategory === "Main" ? (
           <Videos videos={dataVideos} />
         ) : (
-          <PlaylistDetail playList={playList}/>
+          <PlaylistDetail playList={playList} playlistVideo={playlistVideo} />
         )}
       </Container>
     </Box>

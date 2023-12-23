@@ -1,25 +1,26 @@
-import { Stack } from '@mui/material';
-import React from 'react'
-import { colors } from '../../constats/colors';
-import { playlists } from '../../constats';
+import { Stack } from "@mui/material";
+import React from "react";
+import { colors } from "../../constats/colors";
+import { playlists } from "../../constats";
 
-const PlaylistsCategory = ({ selectedCategoryHandler,selectedCategory }) => {
+const PlaylistsCategory = ({ selectedCategoryHandler, selectedCategory }) => {
   return (
     <Stack direction={"row"} sx={{ overflowX: "scroll" }}>
       {playlists?.map((item) => (
         <button
-          className={"category-btn"}
+          className={`category-btn ${
+            item.name === selectedCategory && "active"
+          }`}
           key={crypto.randomUUID()}
           style={{
             borderRadius: "10px",
-            backgroundColor: item.name === selectedCategory && colors.icon,
-            color: item.name === selectedCategory ? "#fff" : colors.icon,
+            marginRight: "5px",
           }}
           onClick={() => selectedCategoryHandler(item.name)}
         >
           <span
             style={{
-              color: item.name === selectedCategory ? "#fff" : colors.icon,
+              color: item.name === selectedCategory ? "#0f0f0f" : "#fff",
               marginRight: "15px",
               opacity: "1",
             }}
@@ -28,7 +29,7 @@ const PlaylistsCategory = ({ selectedCategoryHandler,selectedCategory }) => {
           </span>
           <span
             style={{
-              color: item.name === selectedCategory ? "#fff" : colors.icon,
+              color: item.name === selectedCategory ? "#0f0f0f" : "#fff",
             }}
           >
             {item.name}
@@ -39,4 +40,4 @@ const PlaylistsCategory = ({ selectedCategoryHandler,selectedCategory }) => {
   );
 };
 
-export default PlaylistsCategory
+export default PlaylistsCategory;

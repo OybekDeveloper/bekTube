@@ -23,17 +23,16 @@ const Main = () => {
   const selectedCategoryHandler = (category) => {
     setSelectedCategory(category);
   };
-  return (  
-    <Stack>
+  return (
+    <Stack position={"relative"}>
       <Category
         selectedCategoryHandler={selectedCategoryHandler}
         selectedCategory={selectedCategory}
       />
-      <Box p={2} sx={{ height: "90vh" }}>
+      <Box p={2} paddingTop={"62.8px"} sx={{ height: "90vh" }}>
         <Container maxWidth={"90%"}>
-          <Typography variant={"h4"} fontWeight={"bold"} mb={2}>
-            {selectedCategory}{" "}
-            <span style={{ color: colors.icon }}>videos</span>
+          <Typography variant={"h4"} color={"red"} fontWeight={"bold"} mb={2}>
+            {selectedCategory} <span style={{ color: "#fff" }}>videos</span>
           </Typography>
           <Videos videos={videos} />
         </Container>

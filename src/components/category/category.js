@@ -6,36 +6,44 @@ import {  Stack } from "@mui/material";
 
 const Category = ({ selectedCategoryHandler, selectedCategory }) => {
   return (
-    <Stack direction={"row"} sx={{ overflowX: "scroll" }}>
-      
+    <Stack
+      direction={"row"}
+      sx={{
+        overflowX: "scroll",
+        position:'fixed',
+        zIndex:998,
+        backgroundColor:'#0f0f0f'
+      }}
+    >
       {category?.map((item) => (
-          <button
-            className={"category-btn"}
-            key={crypto.randomUUID()}
+        <button
+          className={`category-btn ${
+            item.name === selectedCategory && "active"
+          }`}
+          key={crypto.randomUUID()}
+          style={{
+            borderRadius: "10px",
+            marginRight: "5px",
+          }}
+          onClick={() => selectedCategoryHandler(item.name)}
+        >
+          <span
             style={{
-              borderRadius: "0",
-              backgroundColor: item.name === selectedCategory && colors.icon,
-              color: item.name === selectedCategory ? "#fff" : colors.icon,
+              color: item.name === selectedCategory ? "#0f0f0f" : "#fff",
+              marginRight: "15px",
+              opacity: "1",
             }}
-            onClick={() => selectedCategoryHandler(item.name)}
           >
-            <span
-              style={{
-                color: item.name === selectedCategory ? "#fff" : colors.icon,
-                marginRight: "15px",
-                opacity: "1",
-              }}
-            >
-              {item.icon}
-            </span>
-            <span
-              style={{
-                color: item.name === selectedCategory ? "#fff" : colors.icon,
-              }}
-            >
-              {item.name}
-            </span>
-          </button>
+            {item.icon}
+          </span>
+          <span
+            style={{
+              color: item.name === selectedCategory ? "#0f0f0f" : "#fff",
+            }}
+          >
+            {item.name}
+          </span>
+        </button>
       ))}
     </Stack>
   );

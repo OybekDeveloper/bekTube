@@ -5,15 +5,20 @@ import { Channel } from "../";
 import { colors } from "../../constats/colors";
 const App = () => {
   return (
-    <Box sx={{ backgroundColor: colors.background }}>
+    <Box
+      position={"relative"}
+      backgroundColor={colors.background}
+    >
       <Navbar />
-      <Routes>
-        <Route path={"/"} element={<Main />} />
-        <Route path={"/channel/:id"} element={<Channel />} />
-        <Route path={"/search/:id"} element={<Search />} />
-        <Route path={"/video/:id"} element={<VideoDetail />} />
-        {/* <Route path={"/playlists:id"} element={<Playlists />} /> */}
-      </Routes>
+      <Box sx={{ marginTop: "76px" }}>
+        <Routes>
+          <Route path={"/"} element={<Main />} />
+          <Route path={"/channel/:id"} element={<Channel />} />
+          <Route path={"/search/:id"} element={<Search />} />
+          <Route path={"/video/:id"} element={<VideoDetail />} />
+          {/* <Route path={"/playlists:id"} element={<Playlists />} /> */}
+        </Routes>
+      </Box>
     </Box>
   );
 };

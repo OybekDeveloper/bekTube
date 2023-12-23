@@ -8,11 +8,7 @@ const VideoComment = ({ video, display }) => {
     snippet: { topLevelComment },
   } = video;
   return (
-    <Stack
-      m={2}
-      display={display}
-      sx={{ transition: "all .3s ease-in-out" }}
-    >
+    <Stack m={2} display={display} sx={{ transition: "all .3s ease-in-out" }}>
       <Stack direction={"row"} alignItems={"center"}>
         <Avatar src={topLevelComment?.snippet?.authorProfileImageUrl} />
         <Typography
@@ -22,7 +18,7 @@ const VideoComment = ({ video, display }) => {
           display={"flex"}
           sx={{ flexDirection: "column" }}
         >
-          <Typography>
+          <Typography color={"white"}>
             {" "}
             @{topLevelComment?.snippet?.authorDisplayName}
           </Typography>
@@ -32,18 +28,28 @@ const VideoComment = ({ video, display }) => {
         </Typography>
       </Stack>
       <Typography alignItems={"center"} m={2}>
-        <Box alignItems={"center"} flexDirection={"row"} display={"flex"}>
+        <Box
+          alignItems={"center"}
+          flexDirection={"row"}
+          display={"flex"}
+          color={"white"}
+        >
           <FavoriteIcon
             sx={{ color: "red", width: "20px", cursor: "pointer" }}
           />
           like {topLevelComment?.snippet?.likeCount}
         </Box>
-        <Box alignItems={"center"} flexDirection={"row"} display={"flex"}>
+        <Box
+          alignItems={"center"}
+          flexDirection={"row"}
+          display={"flex"}
+          color={"white"}
+        >
           <FeedIcon sx={{ width: "20px", color: "grey", cursor: "pointer" }} />
           data: {topLevelComment?.snippet?.publishedAt}
         </Box>
       </Typography>
-      <hr />
+      <hr color="grey" />
     </Stack>
   );
 };

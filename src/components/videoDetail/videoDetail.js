@@ -74,20 +74,27 @@ const VideoDetail = () => {
             <Chip
               label={item}
               key={idx}
-              sx={{ marginTop: "10px", cursor: "pointer", ml: "10px" }}
-              deleteIcon={<Tag />}
+              sx={{
+                color: "white",
+                opacity: 0.7,
+                marginTop: "10px",
+                cursor: "pointer",
+                ml: "10px",
+              }}
+              deleteIcon={<Tag className="tag" />}
               onDelete={() => {}}
               variant="outlined"
             />
           ))}
-          <Typography variant={"h6"} fontWeight={"bold"} p={2}>
+          <Typography variant={"h6"} fontWeight={"bold"} p={2} color={"white"}>
             {title}
           </Typography>
           <Typography
             variant={"subtitle2"}
             width={"100%"}
             p={2}
-            sx={{ opacity: "0.7", width: "90%" }}
+            sx={{ opacity: "0.5", width: "90%" }}
+            color={"white"}
           >
             {description}
           </Typography>
@@ -98,7 +105,7 @@ const VideoDetail = () => {
             justifyContent={"start"}
           >
             <Stack
-              sx={{ opacity: "0.7", cursor: "pointer" }}
+              sx={{ color: "white", opacity: "0.7", cursor: "pointer" }}
               direction={"row"}
               alignItems={"center"}
               py={1}
@@ -108,7 +115,7 @@ const VideoDetail = () => {
               {parseInt(viewCount).toLocaleString()} views
             </Stack>
             <Stack
-              sx={{ opacity: "0.7", cursor: "pointer" }}
+              sx={{ color: "white", opacity: "0.7", cursor: "pointer" }}
               direction={"row"}
               alignItems={"center"}
               py={1}
@@ -118,7 +125,7 @@ const VideoDetail = () => {
               {parseInt(likeCount).toLocaleString()} likes
             </Stack>
             <Stack
-              sx={{ opacity: "0.7" }}
+              sx={{ color: "white", opacity: "0.7" }}
               direction={"row"}
               alignItems={"center"}
               py={1}
@@ -144,7 +151,10 @@ const VideoDetail = () => {
                     sx={{ fontSize: "12px", color: "grey", ml: "5px" }}
                   />
                 </Typography>
-                <Typography variant={"subtitle2"} sx={{ fontSize: "18" }}>
+                <Typography
+                  variant={"subtitle2"}
+                  sx={{ color: "white", fontSize: "18" }}
+                >
                   Channel
                 </Typography>
               </Stack>
@@ -165,8 +175,8 @@ const VideoDetail = () => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                background: "white",
                 cursor: "pointer",
+                backgroundColor: "#0f0f0f",
                 color: "#138d85",
               }}
             >

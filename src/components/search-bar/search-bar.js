@@ -19,14 +19,18 @@ const SearchBar = () => {
       onSubmit={changeHandler}
       component={"form"}
       sx={{
-        display:'flex',
+        display: "flex",
+        borderRadius: "10px",
+        backgroundColor: "#0f0f0f",
         pl: 2,
         boxShadow: "none",
-        border: `1px solid ${colors.background}`,
+        border: `1px solid #303030`,
+        color: "#fff",
       }}
     >
       <input
         value={value}
+        backgroundColor={"transparent"}
         onChange={(e) => setValue(e.target.value)}
         type={"text"}
         placeholder={"Search..."}

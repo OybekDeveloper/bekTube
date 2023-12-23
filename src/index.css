@@ -3,16 +3,25 @@
     padding: 0;
     box-sizing: border-box;
 }
+body{
+    background-color: #0F0F0F;
+    
+}
+.tag{
+    color:white!important;
+}
 
 a{
     text-decoration: none;
     color:black;
 }
 
-.search-bar{
+input{
     border-style: none;
     width: 350px;
     outline: none;
+    color: white!important;
+    background-color: transparent!important;
 }
 
 ::-webkit-scrollbar{
@@ -20,7 +29,7 @@ a{
     width: 0;
 }
 ::-webkit-scrollbar-thumb{
-    background-color: rgb(114,113,113);
+    background-color:#fff;
     border-radius: 10px;
     height: 200px;
 }
@@ -33,7 +42,7 @@ a{
     align-items: center;
     justify-content: center;
     cursor:pointer;
-    background: transparent;
+    background: #272727;
     outline: none;
     font-weight: bold!important;
     text-transform: capitalize;
@@ -43,14 +52,14 @@ a{
     transition: all .3s ease-in-out;
 }
 
-
-.category-btn:hover {
-    background-color: #138d85;
-/*//rgba(94, 70, 75, 0.93)*/
-    color: white !important;
+.active{
+    background-color: #fff;
 }
-.category-btn:hover span{
-    color: white!important;
+.active:hover{
+    background-color: #fff!important;
+}
+.category-btn:hover {
+    background-color: #3f3f3f;
 }
 .react-player{
     height: 77vh!important;
