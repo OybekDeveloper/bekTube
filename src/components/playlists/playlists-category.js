@@ -1,6 +1,5 @@
 import { Stack } from "@mui/material";
 import React from "react";
-import { colors } from "../../constats/colors";
 import { playlists } from "../../constats";
 
 const PlaylistsCategory = ({ selectedCategoryHandler, selectedCategory }) => {

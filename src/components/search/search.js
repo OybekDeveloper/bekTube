@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { ApiService } from "../../service/api.service";
 import { Box, Container, Typography } from "@mui/material";
 import { Videos } from "../index";
-import { colors } from "../../constats/colors";
 
 const Search = () => {
   const [videos, setVideos] = useState([]);

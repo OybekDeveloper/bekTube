@@ -1,6 +1,5 @@
 import React from "react";
 import { category } from "../../constats";
-import { colors } from "../../constats/colors";
 import {  Stack } from "@mui/material";
 
 

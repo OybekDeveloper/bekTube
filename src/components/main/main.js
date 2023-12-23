@@ -1,5 +1,4 @@
 import { Box, Container, Stack, Typography } from "@mui/material";
-import { colors } from "../../constats/colors";
 import { useEffect, useState } from "react";
 import { Category, Videos } from "../";
 import { ApiService } from "../../service/api.service";
