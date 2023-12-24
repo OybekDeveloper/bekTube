@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { IconButton, Paper } from "@mui/material";
 import { Search } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-
 const SearchBar = () => {
   const [value, setValue] = useState("");
   const navigate = useNavigate();
@@ -19,8 +18,10 @@ const SearchBar = () => {
       component={"form"}
       sx={{
         display: "flex",
-        borderRadius: "10px",
-        backgroundColor: "#0f0f0f",
+        justifyContent:'space-between',
+        width:{sm:'250px',md:'350px',lg:'450px'},
+        borderRadius: "20px",
+        backgroundColor: "#121212",
         pl: 2,
         boxShadow: "none",
         border: `1px solid #303030`,
@@ -33,10 +34,17 @@ const SearchBar = () => {
         onChange={(e) => setValue(e.target.value)}
         type={"text"}
         placeholder={"Search..."}
-        className={"search-bar"}
       />
-      <IconButton type={"submit"}>
-        <Search sx={{color:"#fff",opacity:'0.7'}} />
+      <IconButton
+        className="voise"
+        type={"submit"}
+        sx={{
+          background: "#222222",
+          borderTopLeftRadius: "0px",
+          borderBottomLeftRadius: "0px",
+        }}
+      >
+        <Search sx={{ color: "#fff", opacity: "0.7" }} />
       </IconButton>
     </Paper>
   );

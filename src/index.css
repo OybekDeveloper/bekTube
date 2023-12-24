@@ -18,12 +18,17 @@ a{
 
 input{
     border-style: none;
-    width: 350px;
     outline: none;
     color: white!important;
     background-color: transparent!important;
 }
-
+.voise{
+    width: auto;
+    transition: all .3s ease;
+}
+.voise:hover{
+    background-color: #3d3d3d!important;
+}
 ::-webkit-scrollbar{
     height: 1px;
     width: 0;
@@ -65,17 +70,8 @@ input{
     height: 77vh!important;
     width: 100% !important;
 }
-
 @media screen and (max-width: 600px){
-    .search-bar{
-        width: 150px;
-    }
-    .react-player{
+       .react-player{
         height: 45vh!important;
-    }
-}
-@media screen and (max-width: 300px){
-    .search-bar{
-        width: 80px;
     }
 }

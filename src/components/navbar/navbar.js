@@ -1,8 +1,11 @@
-import { Box, Stack } from "@mui/material";
-import logo from "../../constats/logo3.jpg";
+import { Avatar, Box, IconButton, Stack } from "@mui/material";
+import logo from "../../constats/logo2.jpg";
 import { colors } from "../../constats/colors";
 import { Link } from "react-router-dom";
 import SearchBar from "../search-bar/search-bar";
+import KeyboardVoiceIcon from "@mui/icons-material/KeyboardVoice";
+import VideoCallIcon from "@mui/icons-material/VideoCall";
+import NotificationsIcon from "@mui/icons-material/Notifications";
 
 const Navbar = () => {
   return (
@@ -35,15 +38,65 @@ const Navbar = () => {
           />
         </Link>
       </Stack>
-      <SearchBar />
-      <Box
+      <Stack direction={"row"} justifyContent={"center"} alignItems={"center"}>
+        <SearchBar />
+        <IconButton
+          className="voise"
+          type={"submit"}
+          sx={{
+            background: "#222222",
+            marginLeft: "5px",
+          }}
+        >
+          <KeyboardVoiceIcon
+            sx={{
+              width: "100%",
+              color: "white",
+              opacity: "0.7",
+            }}
+          />
+        </IconButton>
+      </Stack>
+      <Stack
+        direction={"row"}
+        alignItems={"center"}
+        justifyContent={"center"}
+        gap={1}
         sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          transition: "all .3s ease-in-out",
+          display: { xs: "none", sm: "flex" },
         }}
-      ></Box>
+      >
+        <IconButton
+          className="voise"
+          type={"submit"}
+          sx={{ background: "#222222", marginLeft: "5px" }}
+        >
+          <VideoCallIcon
+            sx={{
+              width: "100%",
+              color: "white",
+              opacity: "0.7",
+            }}
+          />
+        </IconButton>
+        <IconButton
+          className="voise"
+          type={"submit"}
+          sx={{ background: "#222222", marginLeft: "5px" }}
+        >
+          <NotificationsIcon
+            sx={{
+              width: "100%",
+              color: "white",
+              opacity: "0.7",
+            }}
+          />
+        </IconButton>
+        <Avatar
+          alt="Remy Sharp"
+          src="https://yt3.ggpht.com/HRPRlXL9YVa4ufggoa0k97L3-p9GRivDmh9E4GeclvHtaD7iWgAtu0BIOhbXE_PPyiiS7yPPQA=s88-c-k-c0x00ffffff-no-rj"
+        />
+      </Stack>
     </Stack>
   );
 };
