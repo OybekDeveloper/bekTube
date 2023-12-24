@@ -23,11 +23,11 @@ const Main = () => {
     setSelectedCategory(category);
   };
   return (
-    <Stack position={"relative"}>
-      <Category
-        selectedCategoryHandler={selectedCategoryHandler}
-        selectedCategory={selectedCategory}
-      />
+    <Stack position={"relative"} >
+        <Category
+          selectedCategoryHandler={selectedCategoryHandler}
+          selectedCategory={selectedCategory}
+        />
       <Box p={2} paddingTop={"62.8px"} sx={{ height: "90vh" }}>
         <Container maxWidth={"90%"}>
           <Typography variant={"h4"} color={"red"} fontWeight={"bold"} mb={2}>

@@ -8,8 +8,8 @@ const Category = ({ selectedCategoryHandler, selectedCategory }) => {
     <Stack
       direction={"row"}
       sx={{
-        overflowX: "scroll",
-        position:'fixed',
+         overflowX: "scroll",
+        position:'sticky',
         zIndex:998,
         backgroundColor:'#0f0f0f'
       }}
