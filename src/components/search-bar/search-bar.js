@@ -36,7 +36,7 @@ const SearchBar = () => {
         className={"search-bar"}
       />
       <IconButton type={"submit"}>
-        <Search />
+        <Search sx={{color:"#fff",opacity:'0.7'}} />
       </IconButton>
     </Paper>
   );
