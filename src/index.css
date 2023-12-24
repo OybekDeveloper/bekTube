@@ -75,3 +75,8 @@ input{
         height: 45vh!important;
     }
 }
+@media screen and (max-width: 400px){
+       input{
+        width: 80px;
+    }
+}

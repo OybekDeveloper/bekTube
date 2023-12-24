@@ -1,4 +1,4 @@
-import { Avatar, Box, IconButton, Stack } from "@mui/material";
+import { Avatar, IconButton, Stack } from "@mui/material";
 import logo from "../../constats/logo2.jpg";
 import { colors } from "../../constats/colors";
 import { Link } from "react-router-dom";
@@ -38,7 +38,12 @@ const Navbar = () => {
           />
         </Link>
       </Stack>
-      <Stack direction={"row"} justifyContent={"center"} alignItems={"center"}>
+      <Stack 
+      
+      sx={{
+        width:{xs:'80px',sm:'200px',md:'350px',lg:'450px'}
+      }}
+      direction={"row"} justifyContent={"end"} alignItems={"center"}>
         <SearchBar />
         <IconButton
           className="voise"
