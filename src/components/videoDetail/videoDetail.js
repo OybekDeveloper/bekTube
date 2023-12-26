@@ -29,7 +29,6 @@ const VideoDetail = () => {
   const yil = bugun.getFullYear();
   const oy = bugun.getMonth() + 1;
   const kun = bugun.getDate();
-
   useEffect(() => {
     const getData = async () => {
       try {
@@ -53,13 +52,43 @@ const VideoDetail = () => {
     getData();
   }, [id]);
   console.log(videoComment);
+  useEffect(() => {
+    const storedComments = localStorage.getItem("videoComments");
+    
+    try {
+      if (storedComments !== null && storedComments !== "undefined") {
+        setVideoComment(JSON.parse(storedComments));
+      }
+    } catch (error) {
+      console.error("Error parsing JSON:", error);
+      setVideoComment([]);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("videoComments", JSON.stringify(videoComment));
+  }, [videoComment]);
+
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      console.log("Before Unload Event");
+      localStorage.setItem("videoComments", JSON.stringify(videoComment));
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      console.log("Cleanup");
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [videoComment]);
 
   const addCommentHandler = (e) => {
     e.preventDefault();
     if (addComment.trim() !== "") {
       const newComments = [
         {
-          id:videoComment ? videoComment?.length + 1 :crypto.randomUUID(),
+          id: videoComment ? videoComment?.length + 1 : crypto.randomUUID(),
           snippet: {
             topLevelComment: {
               snippet: {
