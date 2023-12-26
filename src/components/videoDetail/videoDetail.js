@@ -7,7 +7,6 @@ import { Loader, VideoComment, Videos } from "../index";
 import TagFacesIcon from "@mui/icons-material/TagFaces";
 
 import {
-  Addchart,
   CheckCircle,
   FavoriteOutlined,
   MarkChatRead,
@@ -23,7 +22,6 @@ const VideoDetail = () => {
   const [addComment, setAddComment] = useState("");
   const [editAuthComment, setEditAuthComment] = useState(false);
   const [editComment, setEditComment] = useState("");
-  const [deleteComment, setDeleteCOmment] = useState(false);
   const [editedCommentId, setEditedCommentId] = useState(null);
   const [editedCommentText, setEditedCommentText] = useState("");
 
@@ -61,7 +59,7 @@ const VideoDetail = () => {
     if (addComment.trim() !== "") {
       const newComments = [
         {
-          id: videoComment.length + 1,
+          id:videoComment ? videoComment?.length + 1 :crypto.randomUUID(),
           snippet: {
             topLevelComment: {
               snippet: {
@@ -76,7 +74,6 @@ const VideoDetail = () => {
             },
           },
         },
-        ...videoComment,
       ];
       setVideoComment(newComments);
       setAddComment("");
@@ -119,7 +116,7 @@ const VideoDetail = () => {
     setEditAuthComment(true);
   };
   const editCancel = () => {
-    setEditedCommentId("");
+    setEditedCommentId(null);
   };
 
   const commetHandler = () => {
