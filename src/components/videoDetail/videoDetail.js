@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ApiService } from "../../service/api.service";
-import { Avatar, Box, Chip, Stack, Typography } from "@mui/material";
+import { Avatar, Box, Button, Chip, Stack, Typography } from "@mui/material";
 import ReactPlayer from "react-player";
 import { Loader, VideoComment, Videos } from "../index";
+import TagFacesIcon from "@mui/icons-material/TagFaces";
 
 import {
+  Addchart,
   CheckCircle,
   FavoriteOutlined,
   MarkChatRead,
@@ -18,9 +20,18 @@ const VideoDetail = () => {
   const [relatedVideo, setRelatedVideo] = useState([]);
   const [videoComment, setVideoComment] = useState([]);
   const [onComment, setOnComment] = useState(false);
-  const commetHandler = () => {
-    setOnComment(!onComment);
-  };
+  const [addComment, setAddComment] = useState("");
+  const [editAuthComment, setEditAuthComment] = useState(false);
+  const [editComment, setEditComment] = useState("");
+  const [deleteComment, setDeleteCOmment] = useState(false);
+  const [editedCommentId, setEditedCommentId] = useState(null);
+  const [editedCommentText, setEditedCommentText] = useState("");
+
+  const bugun = new Date();
+  const yil = bugun.getFullYear();
+  const oy = bugun.getMonth() + 1;
+  const kun = bugun.getDate();
+
   useEffect(() => {
     const getData = async () => {
       try {
@@ -43,6 +54,77 @@ const VideoDetail = () => {
 
     getData();
   }, [id]);
+  console.log(videoComment);
+
+  const addCommentHandler = (e) => {
+    e.preventDefault();
+    if (addComment.trim() !== "") {
+      const newComments = [
+        {
+          id: videoComment.length + 1,
+          snippet: {
+            topLevelComment: {
+              snippet: {
+                authorProfileImageUrl:
+                  "https://yt3.ggpht.com/HRPRlXL9YVa4ufggoa0k97L3-p9GRivDmh9E4GeclvHtaD7iWgAtu0BIOhbXE_PPyiiS7yPPQA=s88-c-k-c0x00ffffff-no-rj",
+                textOriginal: addComment,
+                authorDisplayName: "Oybek Baxtiyorov",
+                likeCount: 2,
+                publishedAt: `${kun}/${oy}/${yil}`,
+                auth: true,
+              },
+            },
+          },
+        },
+        ...videoComment,
+      ];
+      setVideoComment(newComments);
+      setAddComment("");
+    }
+  };
+
+  const saveEditedComment = () => {
+    const updatedComments = videoComment.map((item) =>
+      item.id === editedCommentId
+        ? {
+            id: videoComment.length + 1,
+            snippet: {
+              topLevelComment: {
+                snippet: {
+                  authorProfileImageUrl:
+                    "https://yt3.ggpht.com/HRPRlXL9YVa4ufggoa0k97L3-p9GRivDmh9E4GeclvHtaD7iWgAtu0BIOhbXE_PPyiiS7yPPQA=s88-c-k-c0x00ffffff-no-rj",
+                  textOriginal: editComment,
+                  authorDisplayName: "Oybek Baxtiyorov",
+                  likeCount: 2,
+                  publishedAt: `${kun}/${oy}/${yil}`,
+                  auth: true,
+                },
+              },
+            },
+          }
+        : item
+    );
+    setVideoComment(updatedComments);
+    setEditedCommentId(null);
+    setEditedCommentText("");
+  };
+  const deleteCommentHandler = (id) => {
+    const updatedComments = videoComment.filter((comment) => comment.id !== id);
+    setVideoComment(updatedComments);
+  };
+
+  const editCommentHandler = (id, text) => {
+    setEditedCommentId(id);
+    setEditComment(text);
+    setEditAuthComment(true);
+  };
+  const editCancel = () => {
+    setEditedCommentId("");
+  };
+
+  const commetHandler = () => {
+    setOnComment(!onComment);
+  };
   if (!videoDetails?.snippet) return <Loader />;
 
   const {
@@ -161,13 +243,47 @@ const VideoDetail = () => {
             </Stack>
           </Link>
           <hr />
-          <Stack
-            sx={{ opacity: "0.7" }}
-            direction={"row"}
-            alignItems={"center"}
-            py={1}
-            px={2}
-          >
+          <Stack sx={{ opacity: "0.7" }} alignItems={"start"} py={1} px={2}>
+            <Stack direction={"row"} paddingY={1} width={"100%"}>
+              <Avatar
+                alt="Remy Sharp"
+                src="https://yt3.ggpht.com/HRPRlXL9YVa4ufggoa0k97L3-p9GRivDmh9E4GeclvHtaD7iWgAtu0BIOhbXE_PPyiiS7yPPQA=s88-c-k-c0x00ffffff-no-rj"
+              />
+              <Stack
+                justifyContent={"start"}
+                alignItems={"start"}
+                width={"100%"}
+                paddingX={1}
+                gap={1}
+              >
+                <input
+                  value={addComment}
+                  style={{
+                    width: "100%",
+                    paddingBottom: "4px",
+                    borderBottom: "2px solid white",
+                    transition: "border-bottom 0.3s ease",
+                  }}
+                  onChange={(e) => setAddComment(e.target.value)}
+                  type={"text"}
+                  placeholder="Izoh yoshing"
+                />
+                <Box
+                  sx={{
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <TagFacesIcon sx={{ color: "white" }} />
+                  <Box>
+                    <Button onClick={() => setAddComment("")}>cancel</Button>
+                    <Button onClick={(e) => addCommentHandler(e)}>Enter</Button>
+                  </Box>
+                </Box>
+              </Stack>
+            </Stack>
             <button
               onClick={commetHandler}
               style={{
@@ -193,6 +309,17 @@ const VideoDetail = () => {
                 key={idx}
                 video={item}
                 display={onComment ? "none" : "block"}
+                editCommentHandler={editCommentHandler}
+                editComment={editComment}
+                setEditComment={setEditComment}
+                setEditedCommentText={setEditedCommentText}
+                setEditedCommentId={setEditedCommentId}
+                editedCommentText={editedCommentText}
+                editAuthComment={editAuthComment}
+                editedCommentId={editedCommentId}
+                editCancel={editCancel}
+                saveEditedComment={saveEditedComment}
+                deleteCommentHandler={deleteCommentHandler}
               />
             ))}
           </Stack>

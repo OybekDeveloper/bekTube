@@ -1,9 +1,20 @@
 import React from "react";
-import { Avatar, Box, Stack, Typography } from "@mui/material";
+import { Avatar, Box, Button, Stack, Typography } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FeedIcon from "@mui/icons-material/Feed";
 
-const VideoComment = ({ video, display }) => {
+const VideoComment = ({
+  video,
+  display,
+  editComment,
+  setEditComment,
+  editCommentHandler,
+  editedCommentId,
+  editCancel,
+  saveEditedComment,
+  deleteCommentHandler
+}) => {
+   
   const {
     snippet: { topLevelComment },
   } = video;
@@ -11,44 +22,101 @@ const VideoComment = ({ video, display }) => {
     <Stack m={2} display={display} sx={{ transition: "all .3s ease-in-out" }}>
       <Stack direction={"row"} alignItems={"center"}>
         <Avatar src={topLevelComment?.snippet?.authorProfileImageUrl} />
-        <Typography
-          variant={"subtitle2"}
-          color={"grey"}
-          ml={"5px"}
-          display={"flex"}
-          sx={{ flexDirection: "column" }}
-        >
-          <Typography color={"white"}>
-            {" "}
-            @{topLevelComment?.snippet?.authorDisplayName}
+        {editedCommentId === video.id ? (
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <input
+              value={editComment}
+              style={{
+                width: "100%",
+                paddingBottom: "4px",
+                borderBottom: "2px solid white",
+                transition: "border-bottom 0.3s ease",
+              }}
+              onChange={(e) => setEditComment(e.target.value)}
+              type={"text"}
+            />
+            <Button onClick={saveEditedComment}>Save</Button>
+            <Button onClick={editCancel}>Cancel</Button>
+          </Box>
+        ) : (
+          <Typography
+            variant={"subtitle2"}
+            color={"grey"}
+            ml={"5px"}
+            display={"flex"}
+            sx={{ flexDirection: "column" }}
+          >
+            <Typography color={"white"}>
+              {" "}
+              @{topLevelComment?.snippet?.authorDisplayName}
+            </Typography>
+            <Typography variant={"subtitle2"}>
+              {topLevelComment?.snippet?.textOriginal}
+            </Typography>
           </Typography>
-          <Typography variant={"subtitle2"}>
-            {topLevelComment?.snippet?.textOriginal}
-          </Typography>
-        </Typography>
+        )}
       </Stack>
-      <Typography alignItems={"center"} m={2}>
-        <Box
+      {editedCommentId === video.id ? (
+        ""
+      ) : (
+        <Stack
+          direction={"row"}
+          justifyContent={"space-between"}
           alignItems={"center"}
-          flexDirection={"row"}
-          display={"flex"}
-          color={"white"}
         >
-          <FavoriteIcon
-            sx={{ color: "red", width: "20px", cursor: "pointer" }}
-          />
-          like {topLevelComment?.snippet?.likeCount}
-        </Box>
-        <Box
-          alignItems={"center"}
-          flexDirection={"row"}
-          display={"flex"}
-          color={"white"}
-        >
-          <FeedIcon sx={{ width: "20px", color: "grey", cursor: "pointer" }} />
-          data: {topLevelComment?.snippet?.publishedAt}
-        </Box>
-      </Typography>
+          <Box alignItems={"center"} m={2}>
+            <Box
+              alignItems={"center"}
+              flexDirection={"row"}
+              display={"flex"}
+              color={"white"}
+            >
+              <FavoriteIcon
+                sx={{ color: "red", width: "20px", cursor: "pointer" }}
+              />
+              like {topLevelComment?.snippet?.likeCount}
+            </Box>
+            <Box
+              alignItems={"center"}
+              flexDirection={"row"}
+              display={"flex"}
+              color={"white"}
+            >
+              <FeedIcon
+                sx={{ width: "20px", color: "grey", cursor: "pointer" }}
+              />
+              data: {topLevelComment?.snippet?.publishedAt}
+            </Box>
+          </Box>
+          {topLevelComment?.snippet?.auth && (
+            <Box
+              sx={{
+                display: "felx",
+                alignItems: "center",
+              }}
+            >
+              <Button
+                onClick={() =>
+                  editCommentHandler(
+                    video?.id,
+                    topLevelComment?.snippet?.textOriginal
+                  )
+                }
+              >
+                Edit
+              </Button>
+              <Button onClick={()=>deleteCommentHandler(video.id)}>Delete</Button>
+            </Box>
+          )}
+        </Stack>
+      )}
       <hr color="grey" />
     </Stack>
   );
