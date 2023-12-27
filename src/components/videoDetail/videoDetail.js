@@ -15,6 +15,7 @@ import {
 } from "@mui/icons-material";
 const VideoDetail = () => {
   const { id } = useParams();
+  const [localComment,setLocalComment]=useState([])
   const [videoDetails, setVideoDetails] = useState([]);
   const [relatedVideo, setRelatedVideo] = useState([]);
   const [videoComment, setVideoComment] = useState([]);
@@ -28,6 +29,8 @@ const VideoDetail = () => {
   const yil = bugun.getFullYear();
   const oy = bugun.getMonth() + 1;
   const kun = bugun.getDate();
+  
+
 
   useEffect(() => {
     const getData = async () => {
@@ -76,6 +79,7 @@ const VideoDetail = () => {
         ? [newComment, ...videoComment]
         : [newComment];
 
+      localStorage.setItem("videoComment", JSON.stringify(newComments));
       setVideoComment(newComments);
       setAddComment("");
     }
@@ -123,12 +127,21 @@ const VideoDetail = () => {
   const commetHandler = () => {
     setOnComment(!onComment);
   };
+    useEffect(() => {
+      const data = JSON.parse(localStorage.getItem("videoComment"));
+      setLocalComment(data)
+      console.log(data)
+    }, []);
+    console.log(localComment);
+
+    
   if (!videoDetails?.snippet) return <Loader />;
 
   const {
     snippet: { title, channelTitle, description, thumbnails },
     statistics: { viewCount, likeCount, commentCount },
   } = videoDetails;
+  
 
   return (
     <Box minHeight={"90vh"} mb={10}>
