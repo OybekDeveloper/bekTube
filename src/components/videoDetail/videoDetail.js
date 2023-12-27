@@ -91,7 +91,8 @@ const VideoDetail = () => {
         snippet: {
           topLevelComment: {
             snippet: {
-              authorProfileImageUrl: "https://yt3.ggpht.com/...", // Your image URL
+              authorProfileImageUrl:
+                "https://yt3.ggpht.com/HRPRlXL9YVa4ufggoa0k97L3-p9GRivDmh9E4GeclvHtaD7iWgAtu0BIOhbXE_PPyiiS7yPPQA=s88-c-k-c0x00ffffff-no-rj",
               textOriginal: addComment,
               authorDisplayName: "Oybek Baxtiyorov",
               likeCount: 2,
