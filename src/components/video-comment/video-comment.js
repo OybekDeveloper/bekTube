@@ -42,8 +42,10 @@ const VideoComment = ({
               onChange={(e) => setEditComment(e.target.value)}
               type={"text"}
             />
-            <Button onClick={saveEditedComment}>Save</Button>
-            <Button onClick={editCancel}>Cancel</Button>
+            <Button sx={{marginRight:'3px'}} variant="outlined" onClick={saveEditedComment}>Save</Button>
+            <Button variant="outlined" color="error" onClick={editCancel}>
+              Cancel
+            </Button>
           </Box>
         ) : (
           <Typography
@@ -103,6 +105,8 @@ const VideoComment = ({
               }}
             >
               <Button
+              sx={{marginRight:'3px'}}
+              variant="contained"
                 onClick={() =>
                   editCommentHandler(
                     video?.id,
@@ -112,7 +116,13 @@ const VideoComment = ({
               >
                 Edit
               </Button>
-              <Button onClick={()=>deleteCommentHandler(video.id)}>Delete</Button>
+              <Button
+                variant="contained"
+                color="error"
+                onClick={() => deleteCommentHandler(video.id)}
+              >
+                Delete
+              </Button>
             </Box>
           )}
         </Stack>

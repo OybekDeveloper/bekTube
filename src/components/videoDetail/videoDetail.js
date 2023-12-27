@@ -24,11 +24,11 @@ const VideoDetail = () => {
   const [editComment, setEditComment] = useState("");
   const [editedCommentId, setEditedCommentId] = useState(null);
   const [editedCommentText, setEditedCommentText] = useState("");
-  const randID = 100000;
   const bugun = new Date();
   const yil = bugun.getFullYear();
   const oy = bugun.getMonth() + 1;
   const kun = bugun.getDate();
+
   useEffect(() => {
     const getData = async () => {
       try {
@@ -51,43 +51,11 @@ const VideoDetail = () => {
 
     getData();
   }, [id]);
-  console.log(videoComment);
-  // useEffect(() => {
-  //   const storedComments = localStorage.getItem("videoComments");
-
-  //   try {
-  //     if (storedComments !== null && storedComments !== "undefined") {
-  //       setVideoComment(JSON.parse(storedComments));
-  //     }
-  //   } catch (error) {
-  //     console.error("Error parsing JSON:", error);
-  //     setVideoComment([]);
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   localStorage.setItem("videoComments", JSON.stringify(videoComment));
-  // }, [videoComment]);
-
-  // useEffect(() => {
-  //   const handleBeforeUnload = (event) => {
-  //     console.log("Before Unload Event");
-  //     localStorage.setItem("videoComments", JSON.stringify(videoComment));
-  //   };
-
-  //   window.addEventListener("beforeunload", handleBeforeUnload);
-
-  //   return () => {
-  //     console.log("Cleanup");
-  //     window.removeEventListener("beforeunload", handleBeforeUnload);
-  //   };
-  // }, [videoComment]);
-
   const addCommentHandler = (e) => {
     e.preventDefault();
     if (addComment.trim() !== "") {
       const newComment = {
-        id: videoComment ? videoComment.length + 1 : randID,
+        id: crypto.randomUUID(),
         snippet: {
           topLevelComment: {
             snippet: {
@@ -309,7 +277,12 @@ const VideoDetail = () => {
                   <TagFacesIcon sx={{ color: "white" }} />
                   <Box>
                     <Button onClick={() => setAddComment("")}>cancel</Button>
-                    <Button onClick={(e) => addCommentHandler(e)}>Enter</Button>
+                    <Button
+                      variant="contained"
+                      onClick={(e) => addCommentHandler(e)}
+                    >
+                      Enter
+                    </Button>
                   </Box>
                 </Box>
               </Stack>
