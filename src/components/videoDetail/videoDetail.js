@@ -24,7 +24,7 @@ const VideoDetail = () => {
   const [editComment, setEditComment] = useState("");
   const [editedCommentId, setEditedCommentId] = useState(null);
   const [editedCommentText, setEditedCommentText] = useState("");
-
+  const randID = 100000;
   const bugun = new Date();
   const yil = bugun.getFullYear();
   const oy = bugun.getMonth() + 1;
@@ -52,58 +52,61 @@ const VideoDetail = () => {
     getData();
   }, [id]);
   console.log(videoComment);
-  useEffect(() => {
-    const storedComments = localStorage.getItem("videoComments");
-    
-    try {
-      if (storedComments !== null && storedComments !== "undefined") {
-        setVideoComment(JSON.parse(storedComments));
-      }
-    } catch (error) {
-      console.error("Error parsing JSON:", error);
-      setVideoComment([]);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const storedComments = localStorage.getItem("videoComments");
 
-  useEffect(() => {
-    localStorage.setItem("videoComments", JSON.stringify(videoComment));
-  }, [videoComment]);
+  //   try {
+  //     if (storedComments !== null && storedComments !== "undefined") {
+  //       setVideoComment(JSON.parse(storedComments));
+  //     }
+  //   } catch (error) {
+  //     console.error("Error parsing JSON:", error);
+  //     setVideoComment([]);
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    const handleBeforeUnload = (event) => {
-      console.log("Before Unload Event");
-      localStorage.setItem("videoComments", JSON.stringify(videoComment));
-    };
+  // useEffect(() => {
+  //   localStorage.setItem("videoComments", JSON.stringify(videoComment));
+  // }, [videoComment]);
 
-    window.addEventListener("beforeunload", handleBeforeUnload);
+  // useEffect(() => {
+  //   const handleBeforeUnload = (event) => {
+  //     console.log("Before Unload Event");
+  //     localStorage.setItem("videoComments", JSON.stringify(videoComment));
+  //   };
 
-    return () => {
-      console.log("Cleanup");
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, [videoComment]);
+  //   window.addEventListener("beforeunload", handleBeforeUnload);
+
+  //   return () => {
+  //     console.log("Cleanup");
+  //     window.removeEventListener("beforeunload", handleBeforeUnload);
+  //   };
+  // }, [videoComment]);
 
   const addCommentHandler = (e) => {
     e.preventDefault();
     if (addComment.trim() !== "") {
-      const newComments = [
-        {
-          id: videoComment ? videoComment?.length + 1 : crypto.randomUUID(),
-          snippet: {
-            topLevelComment: {
-              snippet: {
-                authorProfileImageUrl:
-                  "https://yt3.ggpht.com/HRPRlXL9YVa4ufggoa0k97L3-p9GRivDmh9E4GeclvHtaD7iWgAtu0BIOhbXE_PPyiiS7yPPQA=s88-c-k-c0x00ffffff-no-rj",
-                textOriginal: addComment,
-                authorDisplayName: "Oybek Baxtiyorov",
-                likeCount: 2,
-                publishedAt: `${kun}/${oy}/${yil}`,
-                auth: true,
-              },
+      const newComment = {
+        id: videoComment ? videoComment.length + 1 : randID,
+        snippet: {
+          topLevelComment: {
+            snippet: {
+              authorProfileImageUrl: "https://yt3.ggpht.com/...", // Your image URL
+              textOriginal: addComment,
+              authorDisplayName: "Oybek Baxtiyorov",
+              likeCount: 2,
+              publishedAt: `${kun}/${oy}/${yil}`,
+              auth: true,
             },
           },
         },
-      ];
+      };
+
+      // If videoComment is not null or undefined, create a new array by spreading its contents
+      const newComments = videoComment
+        ? [newComment, ...videoComment]
+        : [newComment];
+
       setVideoComment(newComments);
       setAddComment("");
     }
